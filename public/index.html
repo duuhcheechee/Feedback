@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Response Feedback Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Emergency Response Feedback Form</h1>
+        <img src="customer-feedback-icon-style-free-vector.jpg" alt="Emergency Response" class="header-image">
+        <form id="feedback-form" action="/submit-feedback" method="post">
+            <h2>Personal Information</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="phone">Phone Number (optional):</label>
+            <input type="tel" id="phone" name="phone">
+
+            <h2>Incident Details</h2>
+            <label for="date">Date and Time of the Incident:</label>
+            <input type="datetime-local" id="date" name="date" required>
+
+            <label for="location">Location of the Incident:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="type">Type of Emergency:</label>
+            <select id="type" name="type" required>
+                <option value="">Select...</option>
+                <option value="fire">Fire</option>
+                <option value="medical">Medical</option>
+                <option value="crime">Crime</option>
+                <option value="natural-disaster">Natural Disaster</option>
+                <option value="other">Other</option>
+            </select>
+
+            <h2>Response Details</h2>
+            <label for="response-time">How long did it take for emergency responders to arrive?</label>
+            <input type="text" id="response-time" name="response-time" required>
+
+            <label for="professionalism">Were the responders professional and courteous?</label>
+            <select id="professionalism" name="professionalism" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="effectiveness">Did you feel the situation was handled effectively?</label>
+            <select id="effectiveness" name="effectiveness" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="satisfaction">Were the responders able to address your emergency satisfactorily?</label>
+            <select id="satisfaction" name="satisfaction" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Communication</h2>
+            <label for="contact-method">How did you contact the emergency services?</label>
+            <select id="contact-method" name="contact-method" required>
+                <option value="">Select...</option>
+                <option value="phone">Phone</option>
+                <option value="app">App</option>
+                <option value="in-person">In Person</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="communication">Was the communication clear and helpful?</label>
+            <select id="communication" name="communication" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="updates">Did you receive updates on the status of the emergency response?</label>
+            <select id="updates" name="updates" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Overall Experience</h2>
+            <label for="rating">How would you rate your overall experience with the emergency services?</label>
+            <select id="rating" name="rating" required>
+                <option value="">Select...</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="poor">Poor</option>
+            </select>
+
+            <label for="helpful">What did you find most helpful about the response?</label>
+            <textarea id="helpful" name="helpful" required></textarea>
+
+            <label for="improvements">What improvements would you suggest for future responses?</label>
+            <textarea id="improvements" name="improvements" required></textarea>
+
+            <h2>Follow-up and Support</h2>
+            <label for="follow-up">Did you receive any follow-up after the incident?</label>
+            <select id="follow-up" name="follow-up" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="follow-up-support">Was the follow-up support helpful and timely?</label>
+            <select id="follow-up-support" name="follow-up-support" required>
+                <option value="">Select...</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <h2>Additional Comments</h2>
+            <label for="comments">Any other comments or suggestions?</label>
+            <textarea id="comments" name="comments"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedback-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const formDataObject = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/submit-feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formDataObject),
+                });
+
+                if (response.ok) {
+                    alert('Thank you for your feedback!');
+                } else {
+                    alert('Failed to submit. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
