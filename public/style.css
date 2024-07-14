@@ -7,7 +7,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #eeeef3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,5 +92,5 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #2a7cd4;
 }
