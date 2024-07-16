@@ -142,7 +142,11 @@
                 });
 
                 if (response.ok) {
-                    alert('Thank you for your feedback!');
+                    // Display a thank you message
+                    document.querySelector('.container').innerHTML = `
+                        <h1>Thank you for your feedback!</h1>
+                        <p>We appreciate you taking the time to provide us with your thoughts. Your feedback is valuable to us.</p>
+                    `;
                 } else {
                     alert('Failed to submit. Please try again.');
                 }
